@@ -16,7 +16,7 @@ namespace {
  *
  * Cannot be higher than 50.
  */
-auto const min_receivable_percent = double(35);
+auto const min_receivable_percent = double(40);
 /* If fees are high, we do not swap, ***unless*** our incoming
  * capacity is below this percentage, in which case we end up
  * triggering anyway.
