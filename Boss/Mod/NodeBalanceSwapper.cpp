@@ -36,8 +36,10 @@ auto const swap_amount = 50000
 /* If fees are high, we do not swap, ***unless*** our incoming
  * capacity is below this percentage, in which case we end up
  * triggering anyway.
+ *  auto const min_receivable_percent_highfees = double(50);
+ * Testing - Ignore high fees
  */
- auto const min_receivable_percent_highfees = double(50);
+ auto const min_receivable_percent_highfees = double(100);
 
 
 }
