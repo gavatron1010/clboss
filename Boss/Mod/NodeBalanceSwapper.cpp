@@ -16,12 +16,29 @@ namespace {
  *
  * Cannot be higher than 50.
  */
-auto const min_receivable_percent = double(40);
+/* auto const min_receivable_percent = double(40); */
 /* If fees are high, we do not swap, ***unless*** our incoming
  * capacity is below this percentage, in which case we end up
  * triggering anyway.
  */
-auto const min_receivable_percent_highfees = double(2.5);
+/* auto const min_receivable_percent_highfees = double(2.5); */
+
+
+/* N3on Strategy - Swap as soon as we've received lightning in amount of
+ * maximum swap size on Boltz (0.1btc or 10M sats)
+ * We'll always try to keep inbound capacity at 100%
+ * Of course this likely won't happen if we keep receiving lightning
+ * while waiting for the swap onchain transaction to confirm
+ * auto const max_swap_amount = 10000000
+ * Testing - Boltz min swap 0.0005 BTC or 50k sats
+ */
+auto const swap_amount = 50000
+/* If fees are high, we do not swap, ***unless*** our incoming
+ * capacity is below this percentage, in which case we end up
+ * triggering anyway.
+ */
+ auto const min_receivable_percent_highfees = double(50);
+
 
 }
 
@@ -92,8 +109,12 @@ private:
 			auto total = total_recv + total_send;
 			auto recv_ratio = total_recv / total;
 			auto recv_percent = recv_ratio * 100;
-			if (recv_percent >= min_receivable_percent)
+			/* if (recv_percent >= min_receivable_percent) */
 				/* Nothing to do.  */
+				/* return Ev::lift(); */
+
+			if (total_send < swap_amount)
+				/* Not enough sats for a swap */
 				return Ev::lift();
 
 			auto f = [ this
@@ -103,9 +124,12 @@ private:
 				 ]( Ln::Amount& amount
 				  , std::string& why
 				  ) {
+				/*
 				amount = ( (total_send - total_recv)
 					 * 2
 					 ) / 3;
+				*/
+				amount = swap_amount
 
 				auto os = std::ostringstream();
 				os << "receivable = " << total_recv << ", "
