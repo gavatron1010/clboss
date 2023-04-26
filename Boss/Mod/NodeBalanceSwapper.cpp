@@ -115,7 +115,7 @@ private:
 				/* Nothing to do.  */
 				/* return Ev::lift(); */
 
-			if (total_send < swap_amount)
+			if (total_send < Ln::Amount::sat(swap_amount))
 				/* Not enough sats for a swap */
 				return Ev::lift();
 
