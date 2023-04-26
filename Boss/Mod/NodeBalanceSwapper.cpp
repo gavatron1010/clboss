@@ -131,7 +131,7 @@ private:
 					 * 2
 					 ) / 3;
 				*/
-				amount = swap_amount;
+				amount = Ln::Amount::sat(swap_amount);
 
 				auto os = std::ostringstream();
 				os << "receivable = " << total_recv << ", "
