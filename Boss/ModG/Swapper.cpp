@@ -24,12 +24,12 @@ namespace {
 /* Number of blocks to ignore `trigger_swap` after a swap completes
  * (success or failure does not matter).
  */
-auto const ignored_blocks = std::uint32_t(6);
+auto const ignored_blocks = std::uint32_t(1);
 /* Number of blocks after creating a new swap, after which, if the
  * swap still has not completed, we ignore the swap and return to
  * our default state that we can swap now.
  */
-auto const swap_timeout = std::uint32_t(432);
+auto const swap_timeout = std::uint32_t(1);
 /* Minimum swapping amount.  */
 auto const min_amount = Ln::Amount::btc(0.001);
 
