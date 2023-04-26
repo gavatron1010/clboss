@@ -29,7 +29,7 @@ namespace {
  * We'll always try to keep inbound capacity at 100%
  * Of course this likely won't happen if we keep receiving lightning
  * while waiting for the swap onchain transaction to confirm
- * auto const max_swap_amount = 10000000
+ * auto const swap_amount = 10000000
  * Testing - Boltz min swap 0.0005 BTC or 50k sats
  */
 auto const swap_amount = 50000;
