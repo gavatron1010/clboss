@@ -32,7 +32,7 @@ namespace {
  * auto const max_swap_amount = 10000000
  * Testing - Boltz min swap 0.0005 BTC or 50k sats
  */
-auto const swap_amount = 50000
+auto const swap_amount = 50000;
 /* If fees are high, we do not swap, ***unless*** our incoming
  * capacity is below this percentage, in which case we end up
  * triggering anyway.
@@ -131,7 +131,7 @@ private:
 					 * 2
 					 ) / 3;
 				*/
-				amount = swap_amount
+				amount = swap_amount;
 
 				auto os = std::ostringstream();
 				os << "receivable = " << total_recv << ", "
