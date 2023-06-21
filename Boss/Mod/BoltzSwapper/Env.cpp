@@ -31,7 +31,13 @@ Ev::Io<std::uint32_t> Env::get_feerate() {
 						.field("style", "perkw")
 					.end_object()
 		).then([](Jsmn::Object res) {
-			auto rate = res["perkw"]["opening"];
+			/*
+			* auto rate = res["perkw"]["opening"];
+			*
+			* N3on Strategy - Takes advantage of feerate rework in CLN v23.05
+			* perform swaps agressively targeting next 2 block
+			*/
+			auto rate = res["perkw"]["estimates"][0]["feerate"];
 			return Ev::lift<std::uint32_t>(double(rate));
 		});
 	});
