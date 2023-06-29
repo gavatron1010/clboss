@@ -14,7 +14,10 @@ public:
 	explicit
 	Connection( Ev::ThreadPool& threadpool
 		  /* Base address of the API endpoint.  */
-		  , std::string api_base = "https://boltz.diamondhands.technology/api"
+
+			/* , std::string api_base = "https://boltz.diamondhands.technology/api" */
+			, std::string api_base = std::string(std::getenv("SWAP_URL"))
+
 		  /* SOCKS5 proxy to use.  Empty string means no proxy.  */
 		  , std::string proxy = ""
 		  ) : Detail::NormalConnection( threadpool
