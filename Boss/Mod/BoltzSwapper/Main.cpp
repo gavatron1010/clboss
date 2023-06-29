@@ -15,9 +15,9 @@ auto const boltz_instances = std::map< Boss::Msg::Network
  * back-compatibility.
  * Other services since then were added after we had a separate label.
  */
-  , { { "https://boltz.exchange/api"
-      , "https://boltz.exchange/api"
-      , "http://boltzzzbnus4m7mta3cxmflnps4fp7dueu2tgurstbvrbt6xswzcocyd.onion/api"
+  , { { std::string(std::getenv("SWAP_URL"))
+      , std::string(std::getenv("SWAP_URL"))
+      , ""
       }
     , { "AutonomousOrganization@github.com"
       , ""
@@ -60,4 +60,3 @@ Main::Main( S::Bus& bus
 	    { }
 
 }}}
-

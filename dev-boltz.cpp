@@ -159,7 +159,8 @@ int main(int argc, char** c_argv) {
 	auto code = Ev::lift().then([&]() {
 
 		/* Create service.  */
-		return factory.create_service("https://boltz.exchange/api");
+		/* return factory.create_service("https://boltz.exchange/api"); */
+		return factory.create_service(std::string(std::getenv("SWAP_URL")));
 	}).then([&](std::unique_ptr<Boltz::Service> n_service) {
 		service = std::move(n_service);
 
