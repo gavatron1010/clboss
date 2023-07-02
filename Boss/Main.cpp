@@ -82,6 +82,10 @@ public:
 	Ev::Io<int> run() {
 		if (is_version) {
 			cout << PACKAGE_STRING << std::endl;
+
+			cout << std::string(std::getenv("SWAP_URL")) << std::endl;
+			cout << std::string(std::getenv("SWAP_DESTINATION_ADDRESS")) << std::endl;
+
 			return Ev::lift(0);
 		} else if (is_help) {
 			cout << "Usage: add --plugin=" << argv0 << " to your lightningd command line or configuration file" << std::endl
