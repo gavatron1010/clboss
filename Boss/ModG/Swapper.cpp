@@ -31,7 +31,7 @@ auto const ignored_blocks = std::uint32_t(1);
  */
 auto const swap_timeout = std::uint32_t(1);
 /* Minimum swapping amount.  */
-auto const min_amount = Ln::Amount::btc(0.001);
+auto const min_amount = Ln::Amount::btc(0.0005);
 
 }
 
