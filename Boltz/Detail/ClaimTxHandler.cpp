@@ -110,9 +110,13 @@ Ev::Io<void> ClaimTxHandler::core_run() {
 			tweak = Secp256k1::PrivKey(r.get<std::string>(0));
 			preimage = Ln::Preimage(r.get<std::string>(1));
 
+			/*
 			auto swapDestinationAddress = std::string(std::getenv("SWAP_DESTINATION_ADDRESS"));
 			if(!swapDestinationAddress.empty()) destinationAddress = swapDestinationAddress;
 			else destinationAddress = r.get<std::string>(2);
+			*/
+
+			destinationAddress = r.get<std::string>(2);
 
 			redeemScript = Util::Str::hexread(
 				r.get<std::string>(3)
