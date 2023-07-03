@@ -84,7 +84,7 @@ public:
 			cout << PACKAGE_STRING << std::endl;
 
 			cout << std::string(std::getenv("SWAP_URL")) << std::endl;
-			cout << std::string(std::getenv("SWAP_DESTINATION_ADDRESS")) << std::endl;
+			/*cout << std::string(std::getenv("SWAP_DESTINATION_ADDRESS")) << std::endl;*/
 
 			return Ev::lift(0);
 		} else if (is_help) {
