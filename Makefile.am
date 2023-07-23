@@ -511,6 +511,8 @@ libclboss_la_SOURCES = \
 	Stats/WeightedMedian.hpp \
 	Util/Bech32.cpp \
 	Util/Bech32.hpp \
+	Util/Base58.cpp \
+	Util/Base58.hpp \
 	Util/Either.hpp \
 	Util/Rw.cpp \
 	Util/Rw.hpp \
