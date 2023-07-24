@@ -1,6 +1,7 @@
 #include"Bitcoin/addr_to_scriptPubKey.hpp"
 #include"Util/Bech32.hpp"
 #include"Util/Base58.hpp"
+#include"Util/Str.hpp"
 #include<algorithm>
 #include<iterator>
 
@@ -82,9 +83,9 @@ addr_to_scriptPubKey(std::string const& addr) {
 		auto version = dataStr.substr(0, 2);
 		auto hash = dataStr.substr(2, 40);
 		auto checksum = dataStr.substr(42, 8);
-	
+
 		if(version!="05" || hash.length()!=40) throw std::invalid_argument("Base58 decoded address hash wrong format");
-	
+
 		auto scriptPubKey = Util::Str::hexread("a914" + hash + "87");
 		return scriptPubKey;
 	}
