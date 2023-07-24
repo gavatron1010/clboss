@@ -31,8 +31,10 @@ namespace {
  * while waiting for the swap onchain transaction to confirm
  */
 
+//auto const swap_amount = 10000000;
 /* Testing - 100k sats */
-auto const swap_amount = 10000000;
+auto const swap_amount = 100000;
+
 
 /* If fees are high, we do not swap, ***unless*** our incoming
  * capacity is below this percentage, in which case we end up
