@@ -9,9 +9,26 @@ namespace Bitcoin {
 
 std::vector<std::uint8_t>
 addr_to_scriptPubKey(std::string const& addr) {
-	auto hrp = std::string();
-	auto data = std::vector<bool>();
-	if (Util::Bech32::decode(hrp, data, addr)) {
+
+	/* Base58 - p2sh */
+	if(addr.substr(0, 1)=="3") {
+		std::vector<unsigned char> decoded;
+		if(!Util::Base58::decode(addr.c_str(), decoded, 64))
+			throw std::invalid_argument("Error in DecodeBase58");
+		auto dataStr = Util::Base58::hexToString(decoded);
+		auto version = dataStr.substr(0, 2);
+		auto hash = dataStr.substr(2, 40);
+		auto checksum = dataStr.substr(42, 8);
+		if(version!="05" || hash.length()!=40)
+			throw std::invalid_argument("Base58 decoded address hash wrong format");
+		auto scriptPubKey = Util::Str::hexread("a914" + hash + "87");
+		return scriptPubKey;
+	} else {
+
+		/* Bech32 */
+		auto hrp = std::string();
+		auto data = std::vector<bool>();
+		Util::Bech32::decode(hrp, data, addr);
 		/* TODO: Check the network matches.  */
 		if ( hrp != "bc"
 		  && hrp != "tb"
@@ -74,20 +91,6 @@ addr_to_scriptPubKey(std::string const& addr) {
 						, std::back_inserter(rv)
 						);
 		return rv;
-	} else {
-		/* Base58 - p2sh */
-		std::vector<unsigned char> data;
-		if(!Util::Base58::decode(addr.c_str(), data, 64)) throw std::invalid_argument("Error in DecodeBase58");
-		auto dataStr = Util::Base58::hexToString(data);
-
-		auto version = dataStr.substr(0, 2);
-		auto hash = dataStr.substr(2, 40);
-		auto checksum = dataStr.substr(42, 8);
-
-		if(version!="05" || hash.length()!=40) throw std::invalid_argument("Base58 decoded address hash wrong format");
-
-		auto scriptPubKey = Util::Str::hexread("a914" + hash + "87");
-		return scriptPubKey;
 	}
 }
 
